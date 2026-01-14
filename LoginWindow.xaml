@@ -214,7 +214,7 @@
         </Border>
 
         <!-- 右上に閉じるボタン -->
-        <Button Content="×"
+        <Button Content="終了"
                Width="40"
                Height="40"
                HorizontalAlignment="Right"
