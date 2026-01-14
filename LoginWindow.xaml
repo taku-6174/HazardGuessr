@@ -215,7 +215,7 @@
 
         <!-- 右上に閉じるボタン -->
         <Button Content="終了"
-               Width="40"
+               Width="50"
                Height="40"
                HorizontalAlignment="Right"
                VerticalAlignment="Top"
