@@ -212,9 +212,9 @@ namespace HazardGuessr
                 return;
             }
 
-            if (username.Length > 20)
+            if (username.Length > 10)
             {
-                ShowError("ユーザー名は20文字以内で入力してください");
+                ShowError("ユーザー名は10文字以内で入力してください");
                 PlayerNameTextBox.Focus();
                 PlayerNameTextBox.SelectAll();
                 return;

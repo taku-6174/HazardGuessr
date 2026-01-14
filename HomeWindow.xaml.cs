@@ -15,7 +15,7 @@ namespace HazardGuessr
             _isGuest = isGuest;
 
             // 必要ならプレイヤー名を表示
-            // PlayerNameText.Text = playerName;
+            PlayerNameText.Text+= playerName;
 
             // ゲストの場合はログアウトボタンを非表示にするか
             if (isGuest)

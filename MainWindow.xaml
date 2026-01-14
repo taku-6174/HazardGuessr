@@ -36,8 +36,8 @@
 
             <!-- ========== 左サイドバー：ゲーム情報 ========== -->
             <Border Grid.Row="0" Grid.Column="0" 
-                   Background="#FF1A1A2E"
-                   BorderBrush="#FF1A1A2E"
+                   Background="#1A237E"
+                   BorderBrush="#1A237E"
                    BorderThickness="0,0,2,0">
 
                 <StackPanel Margin="20">
@@ -45,7 +45,7 @@
                     <TextBlock Text="Hazard Guessr"
                               FontSize="24"
                               FontWeight="Bold"
-                              Foreground="#FF00A8FF"
+                              Foreground="#FFEA00"
                               Margin="0,0,0,30"/>
 
                     <!-- 現在の状況 -->
@@ -105,7 +105,7 @@
             <!-- ========== 中央：マップ表示エリア ========== -->
             <Grid Grid.Row="0" Grid.Column="1">
                 <!-- マップキャンバス -->
-                <Border Background="#FF1A1A2E"
+                <Border Background="#1A237E"
                        CornerRadius="10"
                        Margin="0"
                        Padding="10">
@@ -121,8 +121,8 @@
 
             <!-- ========== 右サイドバー：スコア ========== -->
             <Border Grid.Row="0" Grid.Column="2"
-                   Background="#FF1A1A2E"
-                   BorderBrush="#FF1A1A2E"
+                   Background="#1A237E"
+                   BorderBrush="#1A237E"
                    BorderThickness="2,0,0,0">
 
                 <StackPanel Margin="20">
@@ -193,8 +193,8 @@
 
             <!-- ========== 下部：シミュレーション開始ボタン ========== -->
             <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-                   Background="#FF1A1A2E"
-                   BorderBrush="#FF1A1A2E"
+                   Background="#1A237E"
+                   BorderBrush="#1A237E"
                    BorderThickness="0,2,0,0"
                    Padding="20">
 
@@ -206,7 +206,7 @@
                            Width="600"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           Background="#FF007ACC"
+                           Background="#B8DC70"
                            Foreground="White"
                            FontSize="24"
                            FontWeight="Bold"

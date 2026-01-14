@@ -13,7 +13,7 @@
     <Grid>
       
         <!-- ダイアログボックス -->
-        <Border Background="#FF1A1A2E"
+        <Border Background="#1E293B"
                 CornerRadius="15"
                 BorderBrush="#FF007ACC"
                 BorderThickness="3"

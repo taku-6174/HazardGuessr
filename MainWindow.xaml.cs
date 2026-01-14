@@ -169,7 +169,8 @@ namespace HazardGuessr
                 // ホーム画面を表示
                 var homeWindow = new HomeWindow(_playerName, _isGuest);
                 homeWindow.Show();
-
+                _simulationTimer.Stop();
+                _routeTimer?.Stop();
                 // 現在のゲーム画面を閉じる
                 this.Close();
             }
@@ -1015,22 +1016,6 @@ namespace HazardGuessr
             return Math.Min(penalty, 500);
         }
 
-
-        // BackButton_Clickメソッドはそのまま
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            var result = MessageBox.Show("ゲームを中断してホーム画面に戻りますか？",
-                                        "確認",
-                                        MessageBoxButton.YesNo,
-                                        MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
-            {
-                var homeWindow = new HomeWindow(_playerName, _isGuest);
-                homeWindow.Show();
-                this.Close();
-            }
-        }
 
         // MainWindow.xaml.cs
         private void HandleGameEnd()

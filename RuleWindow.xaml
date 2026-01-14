@@ -10,10 +10,8 @@
         <!-- 背景グラデーション（他の画面と同じ） -->
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="#FF002158" Offset="1"/>
-                <GradientStop Color="#FF000073"/>
-                <GradientStop Color="#FF001A6B" Offset="0.9"/>
+                <GradientStop Color="#1A237E"/>
+                
             </LinearGradientBrush>
         </Grid.Background>
 
