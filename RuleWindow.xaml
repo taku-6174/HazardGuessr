@@ -53,7 +53,7 @@
                                       Foreground="#FF00A8FF"
                                       Margin="0,0,0,15"/>
 
-                            <TextBlock Text="「HazardGuessr」は、水の氾濫が迫る中で安全な避難ルートを見つけるゲームです。"
+                            <TextBlock Text="「HazardGuessr」は、災害発生時における避難判断力の育成を目的とした、マップ型の災害避難シミュレーションである"
                                       FontSize="18"
                                       Foreground="White"
                                       TextWrapping="Wrap"
@@ -67,17 +67,21 @@
                            Padding="20"
                            Margin="0,0,0,20">
                         <StackPanel>
-                            <TextBlock Text="🎯 目的"
+                            <TextBlock Text=" 目的"
                                       FontSize="22"
                                       FontWeight="Bold"
                                       Foreground="LightGreen"
                                       Margin="0,0,0,10"/>
 
-                            <TextBlock Text="スタート地点からゴール地点まで、水に浸かる前に安全なルートを見つけましょう。"
-                                      FontSize="16"
-                                      Foreground="#CCCCCC"
-                                      TextWrapping="Wrap"
-                                      LineHeight="26"/>
+                            <TextBlock FontSize="16"
+                               Foreground="#CCCCCC"
+                               TextWrapping="Wrap"
+                               LineHeight="26"
+                               Height="Auto"> 近年、大雨による川の氾濫や地震などの自然災害が多発し、多くの人々が避難を余儀なくされています。<LineBreak/>
+                                その際、安全かつ最短の避難ルートを素早く判断し、迅速に行動する力が命を守るカギとなります。<LineBreak/>
+                                しかし、日常でハザードマップを見る機会は限られており、災害時の具体的な判断力を身につけることは難しいのが現状です。<LineBreak/>
+                                そこで本作では、ゲームを通じて誰でも楽しくハザードマップや避難行動を学べる環境を提供し、災害時に命を守る力を育むことを目的としています。
+                            </TextBlock>
                         </StackPanel>
                     </Border>
 
@@ -237,75 +241,7 @@
                         </StackPanel>
                     </Border>
 
-                    <!-- スコアシステム -->
-                    <Border Background="#FF2D2D40"
-                           CornerRadius="10"
-                           Padding="20"
-                           Margin="0,0,0,20">
-                        <StackPanel>
-                            <TextBlock Text="🏆 スコアシステム"
-                                      FontSize="22"
-                                      FontWeight="Bold"
-                                      Foreground="Gold"
-                                      Margin="0,0,0,10"/>
-
-                            <TextBlock Text="スコアは以下の要素で計算されます："
-                                      FontSize="16"
-                                      Foreground="White"
-                                      Margin="0,0,0,15"/>
-
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <!-- 基本スコア -->
-                                <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                                    <TextBlock Text="基本スコア"
-                                              FontSize="16"
-                                              FontWeight="Bold"
-                                              Foreground="LightGreen"/>
-                                    <TextBlock Text="ゴール到達で5,000点"
-                                              FontSize="14"
-                                              Foreground="#CCCCCC"/>
-                                </StackPanel>
-
-                                <!-- 時間ボーナス -->
-                                <StackPanel Grid.Column="1">
-                                    <TextBlock Text="時間ボーナス"
-                                              FontSize="16"
-                                              FontWeight="Bold"
-                                              Foreground="LightGreen"/>
-                                    <TextBlock Text="早く決断すると高得点"
-                                              FontSize="14"
-                                              Foreground="#CCCCCC"/>
-                                </StackPanel>
-
-                                <!-- ルート効率 -->
-                                <StackPanel Grid.Column="0" Margin="0,15,10,0">
-                                    <TextBlock Text="ルート効率"
-                                              FontSize="16"
-                                              FontWeight="Bold"
-                                              Foreground="LightGreen"/>
-                                    <TextBlock Text="最短ルートに近いと高得点"
-                                              FontSize="14"
-                                              Foreground="#CCCCCC"/>
-                                </StackPanel>
-
-                                <!-- 水の危険度 -->
-                                <StackPanel Grid.Column="1" Margin="0,15,0,0">
-                                    <TextBlock Text="水の危険度"
-                                              FontSize="16"
-                                              FontWeight="Bold"
-                                              Foreground="LightGreen"/>
-                                    <TextBlock Text="水から離れたルートが高得点"
-                                              FontSize="14"
-                                              Foreground="#CCCCCC"/>
-                                </StackPanel>
-                            </Grid>
-                        </StackPanel>
-                    </Border>
+                    
 
                     <!-- ゲームの流れ -->
                     <Border Background="#FF1A1A2E"
@@ -391,31 +327,6 @@
             </Button>
         </Grid>
 
-        <!-- 右上閉じるボタン -->
-        <Button Content="×"
-               Width="40"
-               Height="40"
-               HorizontalAlignment="Right"
-               VerticalAlignment="Top"
-               Margin="20"
-               Background="Transparent"
-               Foreground="#CCCCCC"
-               FontSize="24"
-               FontWeight="Bold"
-               BorderThickness="0"
-               Click="CloseButton_Click">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Opacity" Value="0.7"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="1"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Background" Value="#44FF0000"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+        
     </Grid>
 </Window>

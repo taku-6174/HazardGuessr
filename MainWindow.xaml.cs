@@ -382,10 +382,7 @@ namespace HazardGuessr
         }
         private void _simulationTimer_Tick(object sender, EventArgs e)
         {
-            // 1. 水の氾濫
-            FloodWater();
-
-            // 2. ルート終了チェック
+            // 1. 先にプレイヤーの移動先座標を特定
             if (_currentRouteIndex >= playerRoute.Count)
             {
                 (int lastR, int lastC) = playerRoute.Last();
@@ -395,31 +392,40 @@ namespace HazardGuessr
                 }
                 else
                 {
-                    StopSimulation($"時間切れにより設定したルートの終点 ({lastR}, {lastC}) で停止しました。");
+                    StopSimulation($"時間切れにより停止しました。");
                 }
                 return;
             }
 
-            // 3. 移動先の座標
             (int nextR, int nextC) = playerRoute[_currentRouteIndex];
 
-            // 4. 水チェック
-            if (IsCharacterInWater(nextR, nextC))
-            {
-                StopSimulation("緊急事態！移動先のマスが水に浸水しています。ゲームオーバー！");
-                return;
-            }
-
-            // 5. キャラクターの位置を移動 
+            // 2. 移動を実行 (キャラクターの位置を更新)
             if (_simulationCharacter != null)
             {
                 SetPosition(_simulationCharacter, nextR, nextC);
             }
 
-            // 6. ゴールチェック
+            // 3. 移動した「後」に、そのマスが既に浸水していないかチェック
+            if (IsCharacterInWater(nextR, nextC))
+            {
+                StopSimulation("緊急事態！移動した先が既に浸水していました。ゲームオーバー！");
+                return;
+            }
+
+            // 4. ゴールに到達したかチェック
             if (nextR == currentMapConfig.GoalPosition.Row && nextC == currentMapConfig.GoalPosition.Col)
             {
                 StopSimulation("無事にゴールに到達しました！");
+                return;
+            }
+
+            // 5. プレイヤーの移動が終わったので、ここで「水の氾濫」を進行させる
+            FloodWater();
+
+            // 6. 水が広がった結果、プレイヤーが飲み込まれていないか再チェック
+            if (IsCharacterInWater(nextR, nextC))
+            {
+                StopSimulation("背後から水が迫ってきました！ゲームオーバー！");
                 return;
             }
 
@@ -497,8 +503,7 @@ namespace HazardGuessr
                 if (_startButton != null)
                 {
                     _startButton.Content = "シミュレーション開始";
-                    _startButton.Background = new SolidColorBrush(Color.FromRgb(0, 122, 204)); // 元の青色
-                    _startButton.Foreground = Brushes.White;
+                    
                     _startButton.IsEnabled = true;
                 }
 
@@ -895,11 +900,14 @@ namespace HazardGuessr
             if (isGameOver)
             {
                 score -= HAZARD_PENALTY;
-                return Math.Max(0, score);
+            }
+            else
+            {
+                score = +100;
             }
 
-            // 2. 最短ルートチェック
-            int shortestLength = CalculateShortestPathLength();
+                // 2. 最短ルートチェック
+                int shortestLength = CalculateShortestPathLength();
             int actualLength = playerRoute.Count - 1;
 
             //  最短ルートと実際のルートが同じ長さかチェック 
@@ -934,22 +942,28 @@ namespace HazardGuessr
             }
 
             // 3. 時間ペナルティ（緩やか）
-            // 20秒以内：減点なし（ボーナスもなし）
+            // 20秒以内：加点（ボーナスあり）
             // 20-30秒：少し減点
             // 30秒～50秒：増加減点
             int timePenalty = 0;
+            
 
-            if (_routeTimeSeconds >= 20)
+            if (_routeTimeSeconds >= 10)
             {
-                if (_routeTimeSeconds < 30)
+                if (_routeTimeSeconds < 20)
                 {
                     // 20-30秒：軽い減点
-                    timePenalty = (_routeTimeSeconds - 20) * 75; // 最大750点
+                    timePenalty = (_routeTimeSeconds -10) * 23; // 最大230点
+                }
+                else if (20 <= _routeTimeSeconds && _routeTimeSeconds < 30)
+                {
+                    
+                    timePenalty = 750 + (_routeTimeSeconds - 30) * 81; // 230点＋最大810点
                 }
                 else if (30 <= _routeTimeSeconds && _routeTimeSeconds < 60)
                 {
-                    // 31秒～60秒：重い減点
-                    timePenalty = 750 + (_routeTimeSeconds - 30) * 60; // 750点＋最大1800点
+                    
+                    timePenalty = 3000 + (_routeTimeSeconds - 60) * 122; // 1040点＋無制限増加
                 }
                 else
                 {
@@ -960,7 +974,9 @@ namespace HazardGuessr
             }
             else
             {
-                Console.WriteLine($"時間減点: {_routeTimeSeconds}秒, 減点なし");
+                // --- 10秒までなら100点加点 ---
+                timePenalty = 100;
+                score += timePenalty;
             }
 
             // 4. 水の危険度ペナルティ（大幅緩和）
@@ -975,15 +991,9 @@ namespace HazardGuessr
                 Console.WriteLine($"水の危険度: 減点なし");
             }
 
-            // 最短ルート＋20秒以内＋水なしなら確実に5000点 
-            if (isShortestRoute && _routeTimeSeconds <= 20 && waterPenalty == 0)
-            {
-                Console.WriteLine("🎉 完璧プレイ！5000点満点！");
-                return BASE_SCORE;
-            }
-
             // 最低0点保証、最大5000点
             return Math.Min(BASE_SCORE, Math.Max(0, score));
+           
         }
 
         private int CalculateWaterProximityPenalty()
@@ -1006,7 +1016,7 @@ namespace HazardGuessr
                     {
                         if (currentMapData[checkR, checkC] == 1)
                         {
-                            penalty += 30; // 水に隣接する場合の減点
+                            penalty += 33; // 水に隣接する場合の減点
                         }
                     }
                 }

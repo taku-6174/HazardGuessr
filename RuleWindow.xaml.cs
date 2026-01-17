@@ -27,10 +27,5 @@ namespace HazardGuessr
             this.Close();
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            // アプリケーションを終了
-            Application.Current.Shutdown();
-        }
     }
 }
