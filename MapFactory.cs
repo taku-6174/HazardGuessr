@@ -9,7 +9,7 @@ public static class MapFactory
 
     static MapFactory()
     {
-        // 最初のマップデータ (再利用可能)
+        // 最初のマップデータ 
         int[,] mapDataA = new int[,]
            {
                 {0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -81,7 +81,7 @@ public static class MapFactory
         AllAvailableMaps.Add(new MapConfiguration(
             mapDataB,
             (16, 13),    // スタート座標
-            (8, 26)     // ゴール座標
+            (7, 26)     // ゴール座標
         ));
 
         /*

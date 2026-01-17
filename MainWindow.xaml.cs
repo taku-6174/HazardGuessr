@@ -610,6 +610,8 @@ namespace HazardGuessr
                 }
             }
 
+
+
             // 2. ルートラインの描画（黄色）
             if (playerRoute.Count >= 2)
             {
@@ -682,16 +684,16 @@ namespace HazardGuessr
         {
             switch (tileType)
             {
-                case 0: // 道 (白/薄灰) - 移動可能
-                    return Brushes.LightGray;
-                case 1: // 川 (青) - 初期浸水エリア
-                    return Brushes.Blue;
-                case 2: // 山 (濃緑) - 移動不可
-                    return Brushes.DarkGreen;
-                case 3: // 建物 (薄緑) - 移動不可
-                    return Brushes.LightGreen;
+                case 0: // 道 (白/薄灰)
+                    return new SolidColorBrush(Color.FromRgb(231, 231, 231)); // LightGray
+                case 1: // 川 (青)
+                    return new SolidColorBrush(Color.FromRgb(78, 109, 254));     // Blue
+                case 2: // 山 (濃緑)
+                    return new SolidColorBrush(Color.FromRgb(14, 190, 99));     // DarkGreen
+                case 3: // 建物 (薄緑)
+                    return new SolidColorBrush(Color.FromRgb(254, 233, 180)); // LightGreen
                 default:
-                    return Brushes.White; // 定義されていないタイルタイプ
+                    return new SolidColorBrush(Color.FromRgb(255, 255, 255)); // White
             }
         }
         /// <summary>

@@ -1,10 +1,11 @@
-﻿<Window x:Class="HazardGuessr.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="HazardGuessr.MainWindow"
         WindowStyle="None" 
         WindowState="Maximized"
         Title="HazardGuessr"
-        KeyDown="MainWindow_KeyDown">
+        KeyDown="MainWindow_KeyDown" av:DesignHeight="641.088" av:DesignWidth="998.054">
 
     <Grid>
         <!-- 背景グラデーション（HomeWindowと同じ） -->
@@ -96,7 +97,7 @@
                             <TextBlock Text="Backspace：ひとつ戻る"
                                       Foreground="#CCCCCC"
                                       FontSize="12"/>
-                           
+
                         </StackPanel>
                     </Border>
                 </StackPanel>
@@ -104,26 +105,24 @@
 
             <!-- ========== 中央：マップ表示エリア ========== -->
             <Grid Grid.Row="0" Grid.Column="1">
-                <!-- マップキャンバス -->
                 <Border Background="#1A237E"
                        CornerRadius="10"
-                       Margin="0"
+                       Margin="-14,0,-16,0"
                        Padding="10">
 
-                    <Canvas Name="MapCanvas"
+                    <Canvas x:Name="MapCanvas"
                            Background="#FF1A1A2A"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"/>
                 </Border>
 
-               
+
             </Grid>
 
-            <!-- ========== 右サイドバー：スコア ========== -->
-            <Border Grid.Row="0" Grid.Column="2"
+            <Border Grid.Row="0" Grid.Column="1"
                    Background="#1A237E"
                    BorderBrush="#1A237E"
-                   BorderThickness="2,0,0,0">
+                   BorderThickness="2,0,0,0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="235">
 
                 <StackPanel Margin="20">
                     <!-- スコア表示 -->
@@ -143,7 +142,7 @@
                                       FontWeight="Bold"
                                       HorizontalAlignment="Center"/>
 
-                            
+
                         </StackPanel>
                     </Border>
 
@@ -171,12 +170,12 @@
                            Margin="0,30,0,0"
                            Click="ExitButton_Click">
                         <Button.Resources>
-                            <Style TargetType="Border">
+                            <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="5"/>
                             </Style>
                         </Button.Resources>
                         <Button.Style>
-                            <Style TargetType="Button">
+                            <Style TargetType="{x:Type Button}">
                                 <Setter Property="Opacity" Value="0.8"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
@@ -214,12 +213,12 @@
                            Cursor="Hand"
                            Click="StartSimulationButton_Click">
                         <Button.Resources>
-                            <Style TargetType="Border">
+                            <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="15"/>
                             </Style>
                         </Button.Resources>
                         <Button.Style>
-                            <Style TargetType="Button">
+                            <Style TargetType="{x:Type Button}">
                                 <Setter Property="Opacity" Value="0.9"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
