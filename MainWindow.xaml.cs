@@ -905,7 +905,7 @@ namespace HazardGuessr
             }
             else
             {
-                score = +100;
+                score +=100;
             }
 
                 // 2. 最短ルートチェック
