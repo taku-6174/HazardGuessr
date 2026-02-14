@@ -8,7 +8,7 @@ public static class MapFactory
     public static List<MapConfiguration> AllAvailableMaps { get; } = new List<MapConfiguration>();
 
     static MapFactory()
-    {/*
+    {
         // 最初のマップデータ 
         int[,] mapDataA = new int[,]
            {
@@ -660,7 +660,7 @@ public static class MapFactory
             (16, 14),    // スタート座標
             (7, 28)     // ゴール座標
         ));
-        */
+        
         // マップ21
         int[,] mapDataU = new int[,]
         {
